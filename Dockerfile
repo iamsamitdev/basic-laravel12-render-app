@@ -37,7 +37,7 @@ RUN ls -la public/build
 RUN chmod -R 775 storage bootstrap/cache
 
 # เปิด Port
-EXPOSE 8080
+EXPOSE 10000
 
 # Start Laravel Server
 CMD php artisan config:clear \
@@ -45,4 +45,4 @@ CMD php artisan config:clear \
  && php artisan view:clear \
  && php artisan config:cache \
  && php artisan migrate --force \
- && php artisan serve --host=0.0.0.0 --port=8080
+ && php artisan serve --host=0.0.0.0 --port=10000
