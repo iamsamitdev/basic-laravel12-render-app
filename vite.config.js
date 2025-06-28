@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => {
             }),
             tailwindcss(),
         ],
-        base: env.VITE_ASSET_URL || '/',
+        base: '/build/', // หรือปล่อยเป็นค่าว่าง '' เพือให้ vite ใช้ relative path
         build: {
             manifest: true,
             manifestFileName: 'manifest.json',
