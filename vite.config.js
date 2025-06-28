@@ -1,27 +1,25 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import laravel from 'laravel-vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+
+    const env = loadEnv(mode, process.cwd())
 
     return {
         plugins: [
             laravel({
                 input: ['resources/css/app.css', 'resources/js/app.js'],
-                refresh: true,
+                refresh: false,
             }),
             tailwindcss(),
         ],
-        server: {
-            https: true, // Enable HTTPS
-        },
-        base: '/build/', // หรือปล่อยว่างเป็น '' เพื่อให้ Vite ใช้ relative path
+        base: env.VITE_ASSET_URL || '/',
         build: {
             manifest: true,
             manifestFileName: 'manifest.json',
             outDir: 'public/build',
             emptyOutDir: true,
-            assetsDir: '', // ทำให้ assets ไม่อยู่ในโฟลเดอร์ย่อย
             rollupOptions: {
                 input: [
                     'resources/css/app.css',
